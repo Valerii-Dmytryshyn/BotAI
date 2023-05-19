@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "BotAI": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7259",
+      "launchBrowser": false
+    }
+  }
+}

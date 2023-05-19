@@ -30,8 +30,8 @@ namespace BotAI.Services
             _chatRequest.Messages.Add(new ChatMessage(ChatMessageRole.User, question));
             var response = await _openAI.Chat.CreateChatCompletionAsync(_chatRequest);
 
-            _userService.AddMessage(ChatMessageRole.User, question, _user.Id);
-            _userService.AddMessage(ChatMessageRole.System, response.ToString(), _user.Id);
+            _userService.AddMessage(ChatMessageRole.User, question, _user.Id, _user.Username);
+            _userService.AddMessage(ChatMessageRole.System, response.ToString(), _user.Id, _user.Username);
 
             return response.ToString();
         }

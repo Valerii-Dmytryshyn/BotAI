@@ -27,7 +27,7 @@ namespace BotAI.Services
             return user;
         }
 
-        public async void AddMessage(ChatMessageRole role, string message, long userId) =>
-            await _messageRepository.AddMessage(role, message, userId);
+        public async void AddMessage(ChatMessageRole role, string message, long userId, string username) =>
+            await _messageRepository.AddMessage(role, message, userId, username);
     }
 }

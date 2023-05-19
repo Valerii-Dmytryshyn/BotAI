@@ -40,5 +40,6 @@ namespace BotAI.Models
         public string Name { get; set; }
         [JsonProperty("userId")]
         public string UserId { get; set; }
+        public string UserName { get; set; }
     }
 }

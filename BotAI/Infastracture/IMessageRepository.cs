@@ -7,7 +7,7 @@ namespace BotAI.Infastracture
 {
     public interface IMessageRepository
     {
-        Task AddMessage(ChatMessageRole role, string message, long userId);
+        Task AddMessage(ChatMessageRole role, string message, long userId, string username);
         void CreateIfNotExist();
         List<ChatMessageModel> GetChatMessages(long userId);
     }

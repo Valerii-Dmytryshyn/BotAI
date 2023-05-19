@@ -22,7 +22,7 @@ namespace BotAI.Infastracture
         public void CreateIfNotExist() =>
             _storage.GetCloudTable(Constants.MessagesTableName);
 
-        public async Task AddMessage(ChatMessageRole role, string message, long userId)
+        public async Task AddMessage(ChatMessageRole role, string message, long userId, string username)
         {
             var messageTable = _storage.GetCloudTable(Constants.MessagesTableName);
             var chatMessageId = GetNextChatMessageId(messageTable);
@@ -31,6 +31,7 @@ namespace BotAI.Infastracture
                 Role = role,
                 Content = message,
                 UserId = userId.ToString(),
+                UserName = username,
                 PartitionKey = chatMessageId.ToString(),
                 RowKey = chatMessageId.ToString(),
             };

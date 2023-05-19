@@ -8,6 +8,6 @@ namespace BotAI.Services
     public interface IUserService
     {
         Task<BotUser> GetUser(Update update);
-        void AddMessage(ChatMessageRole role, string message, long userId);
+        void AddMessage(ChatMessageRole role, string message, long userId, string username);
     }
 }

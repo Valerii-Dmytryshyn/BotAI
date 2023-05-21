@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotAI", "BotAI\BotAI.csproj", "{BA868304-F17B-4B53-9409-308E824B8443}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BotAI", "BotAI\BotAI.csproj", "{BA868304-F17B-4B53-9409-308E824B8443}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotAI.Test", "BotAI.Test\BotAI.Test.csproj", "{8070B4B0-BE96-45C7-98D2-1AE80115E908}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{BA868304-F17B-4B53-9409-308E824B8443}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA868304-F17B-4B53-9409-308E824B8443}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA868304-F17B-4B53-9409-308E824B8443}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8070B4B0-BE96-45C7-98D2-1AE80115E908}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8070B4B0-BE96-45C7-98D2-1AE80115E908}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8070B4B0-BE96-45C7-98D2-1AE80115E908}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8070B4B0-BE96-45C7-98D2-1AE80115E908}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

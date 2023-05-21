@@ -2,7 +2,6 @@
 using BotAI.Models;
 using OpenAI_API;
 using OpenAI_API.Chat;
-using System.IO;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
 
@@ -10,12 +9,12 @@ namespace BotAI.Services
 {
     public class OpenaiService : IOpenaiService
     {
-        private readonly OpenAIAPI _openAI;
+        private readonly IOpenAIAPI _openAI;
         private readonly IUserService _userService;
         private readonly BotUser _user;
         private readonly ChatRequest _chatRequest;
 
-        public OpenaiService(OpenAIAPI openAI, IUserService userService, BotUser user)
+        public OpenaiService(IOpenAIAPI openAI, IUserService userService, BotUser user)
         {
             _chatRequest = GenerateUserChatRequst(user);
 

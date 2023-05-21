@@ -3,7 +3,7 @@ using OpenAI_API.Chat;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
 
-namespace BotAI.Services
+namespace BotAI.Abstract
 {
     public interface IUserService
     {

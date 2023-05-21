@@ -12,5 +12,7 @@ namespace BotAI.Models
             Update = update;
             User = user;
         }
+
+        public string MessageText => Update.Message.Text;
     }
 }

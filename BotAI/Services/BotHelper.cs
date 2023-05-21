@@ -1,6 +1,7 @@
 ﻿using BotAI.Abstract;
 using System.Threading.Tasks;
 using Telegram.Bot;
+using Telegram.Bot.Types;
 
 namespace BotAI.Services
 {
@@ -15,5 +16,8 @@ namespace BotAI.Services
 
         public async Task SendText(long userId, string message) =>
             await _botClient.SendTextMessageAsync(userId, message);
+
+        public async Task SendImage(long userId, InputFile image) => 
+            await _botClient.SendPhotoAsync(userId, image);
     }
 }

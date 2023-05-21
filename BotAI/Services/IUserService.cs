@@ -9,5 +9,6 @@ namespace BotAI.Services
     {
         Task<BotUser> GetUser(Update update);
         void AddMessage(ChatMessageRole role, string message, long userId, string username);
+        void ChangeMode(Request request);
     }
 }

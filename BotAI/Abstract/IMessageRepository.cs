@@ -3,7 +3,7 @@ using OpenAI_API.Chat;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BotAI.Infastracture
+namespace BotAI.Abstract
 {
     public interface IMessageRepository
     {

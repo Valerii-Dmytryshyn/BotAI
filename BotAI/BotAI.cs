@@ -14,6 +14,7 @@ using BotAI.Abstract;
 using BotAI.Services;
 using OpenAI_API;
 using BotAI.Infastracture;
+using Telegram.Bot.Requests.Abstractions;
 
 namespace BotAI
 {
@@ -56,12 +57,29 @@ namespace BotAI
         public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req, ILogger log)
         {
             var request = await GenerateRequest(req);
-            PopulateOpenAiService(request.User);
+            PopulateOpenAiService(request.User);//TODO: refactor it somehow
 
-            if (request.Update.Type != UpdateType.Message) { }//TODO:
+            //if (request.Update.Type != UpdateType.Message) { }//TODO:
+            if (NeedToChangeMode(request))
+            {
+                _userService.ChangeMode(request);
+                await _botHelper.SendText(request.User.Id, "Mode was changed to " + (request.MessageText == Constants.TextModeCommand ? 
+                    "Text Genaration mode. Now you can ask any assist. For example 'Write code that will sum two numbers'" :
+                    "Image Genaration mode. Now you can write any request and bot will return you image related to your request. For example 'Spider-man in Toy Story'"));
+                return new OkResult();
+            }
 
-            var response = await _openaiService.AskQuestion(request.Update.Message.Text);
-            await _botHelper.SendText(request.User.Id, response);
+            if (request.User.Mode == GenerationMode.Text)
+            {
+                var response = await _openaiService.AskQuestion(request.MessageText);
+                await _botHelper.SendText(request.User.Id, response);
+            }
+            else if (request.User.Mode == GenerationMode.Image)
+            {
+                await _botHelper.SendText(request.User.Id, "Your request is processing...");
+                var image = await _openaiService.GenerateImage(request.MessageText);
+                await _botHelper.SendImage(request.User.Id, image);
+            }
 
             return new OkResult();
         }
@@ -81,5 +99,8 @@ namespace BotAI
             var openai = new OpenAIAPI(_openaiKey);
             _openaiService = new OpenaiService(openai, _userService, user);
         }
+
+        private bool NeedToChangeMode(Request request) =>
+            request.MessageText == Constants.TextModeCommand || request.MessageText == Constants.ImageModeCommand;
     }
 }

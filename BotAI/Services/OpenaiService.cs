@@ -2,10 +2,9 @@
 using BotAI.Models;
 using OpenAI_API;
 using OpenAI_API.Chat;
-using OpenAI_API.Completions;
-using OpenAI_API.Models;
-using System.Linq;
+using System.IO;
 using System.Threading.Tasks;
+using Telegram.Bot.Types;
 
 namespace BotAI.Services
 {
@@ -34,6 +33,12 @@ namespace BotAI.Services
             _userService.AddMessage(ChatMessageRole.System, response.ToString(), _user.Id, _user.Username);
 
             return response.ToString();
+        }
+
+        public async Task<InputFile> GenerateImage(string request)
+        {
+            var result = await _openAI.ImageGenerations.CreateImageAsync(request);
+            return InputFile.FromString(result.Data[0].Url);
         }
 
         private ChatRequest GenerateUserChatRequst(BotUser user)

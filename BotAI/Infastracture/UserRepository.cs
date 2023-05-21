@@ -1,4 +1,5 @@
-﻿using BotAI.Models;
+﻿using BotAI.Abstract;
+using BotAI.Models;
 using OpenAI_API.Chat;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace BotAI.Infastracture
             if (userFromTable != null)
                 return userFromTable;
 
+            user.Mode = GenerationMode.Text;
             await _storage.InsertEntity(userTable, user);
             return user;
         }
@@ -39,6 +41,14 @@ namespace BotAI.Infastracture
         public async Task AddMessage(BotUser user, ChatMessage chatMessage)
         {
             user.Messages.Add(chatMessage);
+            var userTable = _storage.GetCloudTable(Constants.UserTableName);
+
+            await _storage.InsertEntity(userTable, user);
+        }
+
+        public async Task ChangeMode(BotUser user, GenerationMode mode)
+        {
+            user.Mode = mode;
             var userTable = _storage.GetCloudTable(Constants.UserTableName);
 
             await _storage.InsertEntity(userTable, user);

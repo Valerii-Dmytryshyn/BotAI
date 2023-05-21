@@ -1,4 +1,4 @@
-﻿using BotAI.Infastracture;
+﻿using BotAI.Abstract;
 using BotAI.Models;
 using OpenAI_API.Chat;
 using System.Linq;
@@ -26,6 +26,15 @@ namespace BotAI.Services
 
             return user;
         }
+
+        public void ChangeMode(Request request)
+        {
+            if (request.MessageText == Constants.TextModeCommand)
+                _userRepository.ChangeMode(request.User, GenerationMode.Text);
+            else if(request.MessageText == Constants.ImageModeCommand)
+                _userRepository.ChangeMode(request.User, GenerationMode.Image);
+        }
+
 
         public async void AddMessage(ChatMessageRole role, string message, long userId, string username) =>
             await _messageRepository.AddMessage(role, message, userId, username);

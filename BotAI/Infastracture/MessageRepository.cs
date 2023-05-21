@@ -1,4 +1,5 @@
-﻿using BotAI.Models;
+﻿using BotAI.Abstract;
+using BotAI.Models;
 using Microsoft.Azure.Cosmos.Table;
 using Microsoft.Azure.Documents;
 using OpenAI_API.Chat;

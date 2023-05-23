@@ -13,7 +13,7 @@ namespace BotAI.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public List<ChatMessage> Messages { get; set; }
-        public GenerationMode Mode { get; set; }
+        public int Mode { get; set; }
 
         public static BotUser GenerateBotUser(Update update)
         {

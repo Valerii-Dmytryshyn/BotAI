@@ -62,7 +62,7 @@ namespace BotAI.Test.Services
                 FirstName = "TestFirstName",
                 LastName = "TestLastName",
                 Messages = new List<ChatMessage>(),
-                Mode = GenerationMode.Text,
+                Mode = (int)GenerationMode.Text,
                 PartitionKey = "1",
                 ETag = "Etag",
                 RowKey = "1",

@@ -58,25 +58,31 @@ namespace BotAI
         {
             var request = await GenerateRequest(req);
             PopulateOpenAiService(request.User);//TODO: refactor it somehow
-
-            //if (request.Update.Type != UpdateType.Message) { }//TODO:
-            if (NeedToChangeMode(request))
+            if (request.MessageText == "/start")
             {
-                _userService.ChangeMode(request);
-                await _botHelper.SendText(request.User.Id, "Mode was changed to " + (request.MessageText == Constants.TextModeCommand ? 
-                    "Text Genaration mode. Now you can ask any assist. For example 'Write code that will sum two numbers'" :
-                    "Image Genaration mode. Now you can write any request and bot will return you image related to your request. For example 'Spider-man in Toy Story'"));
+                await _botHelper.SendText(request.User.Id, "Привіт! Я радий, що ти звернувся до мене. Я допоможу тобі з усіма необхідними запитами та запрошеннями. Що тебе цікавить?");
                 return new OkResult();
             }
 
-            if (request.User.Mode == GenerationMode.Text)
+            //TODO: fix
+            if (NeedToChangeMode(request))
             {
+                _userService.ChangeMode(request);
+                await _botHelper.SendText(request.User.Id, "Режим змінено на " + (request.MessageText == Constants.TextModeCommand ?
+                    "Режим генерації тексту. Тепер ви можете попросити будь-яку допомогу. Наприклад, 'Напишіть код, який додає два числа'" :
+                    "Режим генерації зображень. Тепер ви можете написати будь-який запит, і бот поверне вам зображення, пов'язане з вашим запитом. Наприклад, 'Людина-павук в Історії іграшок'"));
+                return new OkResult();
+            }
+
+            if (request.User.Mode == (int)GenerationMode.Text)
+            {
+                await _botHelper.SendText(request.User.Id, "Запит опрацьовується...");
                 var response = await _openaiService.AskQuestion(request.MessageText);
                 await _botHelper.SendText(request.User.Id, response);
             }
-            else if (request.User.Mode == GenerationMode.Image)
+            else if (request.User.Mode == (int)GenerationMode.Image)
             {
-                await _botHelper.SendText(request.User.Id, "Your request is processing...");
+                await _botHelper.SendText(request.User.Id, "Запит опрацьовується...");
                 var image = await _openaiService.GenerateImage(request.MessageText);
                 await _botHelper.SendImage(request.User.Id, image);
             }

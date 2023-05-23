@@ -25,7 +25,7 @@ namespace BotAI.Infastracture
             if (userFromTable != null)
                 return userFromTable;
 
-            user.Mode = GenerationMode.Text;
+            user.Mode = (int)GenerationMode.Text;
             await _storage.InsertEntity(userTable, user);
             return user;
         }
@@ -48,7 +48,7 @@ namespace BotAI.Infastracture
 
         public async Task ChangeMode(BotUser user, GenerationMode mode)
         {
-            user.Mode = mode;
+            user.Mode = (int)mode;
             var userTable = _storage.GetCloudTable(Constants.UserTableName);
 
             await _storage.InsertEntity(userTable, user);
